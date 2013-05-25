@@ -1,3 +1,5 @@
+import os
+
 def get_theme_dir():
     """
     Returns path to directory containing this package's theme.
