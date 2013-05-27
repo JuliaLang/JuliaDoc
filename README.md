@@ -18,7 +18,6 @@ In the ReadTheDocs admin page for your package's documentation:
 import juliadoc
 
 extensions = ['juliadoc.julia', 'juliadoc.jlhelp']
-templates_path = [juliadoc.get_templates_dir()]
 html_theme_path = [juliadoc.get_theme_dir()]
 html_sidebars = juliadoc.default_sidebars()
 ```
