@@ -24,7 +24,7 @@ def default_sidebars():
     sidebar on the index page and sub-pages.
     """
     return {
-        '**': ['localtoc.html', 'searchbox.html'],
-        'index': [],
+        '**': ['localtoc.html', 'relations.html', 'searchbox.html'],
+        'index': ['sidebarintro.html', 'searchbox.html'],
         'search': [],
     }
