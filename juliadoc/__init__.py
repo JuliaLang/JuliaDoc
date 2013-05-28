@@ -16,6 +16,6 @@ def default_sidebars():
     """
     return {
         '**': ['localtoc.html', 'relations.html', 'searchbox.html'],
-        'index': ['sidebarintro.html', 'searchbox.html'],
+        'index': ['searchbox.html'],
         'search': [],
     }
