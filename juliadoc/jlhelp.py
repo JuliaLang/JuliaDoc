@@ -51,8 +51,6 @@ class JuliaHelpTranslator(TextTranslator):
         category = self._current_title.split('---')[0].strip()
         if self._current_module is not None:
             module = self._current_module
-            if module != 'Base':
-                category = module
         else:
             module = ''
         name = self._desc_name
