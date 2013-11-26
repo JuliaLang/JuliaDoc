@@ -5,9 +5,11 @@ import time
 import codecs
 import StringIO
 from os import path
+import traceback
+
 import doctest
 from doctest import *
-from doctest import _SpoofOut, _indent, TestResults
+from doctest import _SpoofOut, _indent, TestResults, _exception_traceback
 from subprocess import Popen, PIPE, STDOUT
 
 from docutils import nodes
@@ -79,7 +81,7 @@ class DocTestParser:
         argument `name` is a name identifying this string, and is only
         used for error messages.
         """
-        #string = string.expandtabs()
+        string = string.expandtabs()
         # If all lines begin with the same indentation, then strip it.
         min_indent = self._min_indent(string)
         if min_indent > 0:
@@ -457,9 +459,10 @@ class SphinxDocTestRunner(object):
             # Run the example in the given context, and record
             # any exception that gets raised.  (But don't intercept
             # keyboard interrupts.)
+            got = ""
             try:
                 # Don't blink!  This is where the user's code gets run.
-                src = example.source.strip()
+                src = example.source.strip().encode('utf-8').replace('"""',r'\"""')
                 # restore ans cleared by the separator println
                 self.julia.stdin.write('ans=_ans;')
                 # run command
@@ -482,7 +485,6 @@ class SphinxDocTestRunner(object):
             except KeyboardInterrupt:
                 raise
             except:
-                #raise
                 exception = sys.exc_info()
 
             #got = self._fakeout.getvalue()  # the actual output
