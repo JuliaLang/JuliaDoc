@@ -90,7 +90,7 @@ class JuliaHelpBuilder(TextBuilder):
         try:
             f = codecs.open(outfilename, 'w', 'utf-8')
             try:
-                f.write('# automatically generated -- do not edit\n\n' +
+                f.write('# automatically generated from files in doc/stdlib/ -- do not edit here\n\n' +
                         '{\n\n')
 
                 for docname in self.status_iterator(
