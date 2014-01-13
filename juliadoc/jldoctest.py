@@ -10,6 +10,7 @@ import traceback
 import doctest
 from doctest import *
 from doctest import _SpoofOut, _indent, TestResults, _exception_traceback
+from doctest import OPTIONFLAGS_BY_NAME
 from subprocess import Popen, PIPE, STDOUT
 
 from docutils import nodes
