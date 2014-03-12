@@ -1,18 +1,9 @@
-{#
-    basic/localtoc.html
-    ~~~~~~~~~~~~~~~~~~~
-
-    Sphinx sidebar template: local table of contents.
-
-    :copyright: Copyright 2007-2011 by the Sphinx team, see AUTHORS.
-    :license: BSD, see LICENSE for details.
-#}
-<p class="logo">
-<svg version="1.1" id="Layer_1"
-	 xmlns="http://www.w3.org/2000/svg"
-	 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="158px" height="106px" viewBox="0 0 310 216" enable-background="new 0 0 310 216"
-	 xml:space="preserve">
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="158px" height="106px" viewBox="0 0 310 216"
+     enable-background="new 0 0 310 216"
+     xml:space="preserve">
 
 <!-- blue dot -->
 <circle fill="#6b85dd" stroke="#4266d5" stroke-width="3" cx="50.5" cy="58.665" r="16.5"/>
@@ -69,10 +60,3 @@
 	c1.521-0.951,2.949-2.072,4.539-2.887c2.31-1.18,2.97-2.861,2.894-5.445C277.561,140.484,277.695,133.527,277.695,126.393z"/>
 
 </svg>
-</p>
-{%- if display_toc %}
-  <h3><a href="{{ pathto(master_doc) }}">{{ _('Table Of Contents') }}</a></h3>
-  {{ toc }}
-{%- else %}
-  <h3><a href="{{ pathto(master_doc) }}">{{ _('Main page') }}</a></h3>
-{%- endif %}
