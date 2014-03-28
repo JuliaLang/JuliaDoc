@@ -25,8 +25,6 @@ class JuliaHelpTranslator(TextTranslator):
             self.states[-1].append((-1, etext))
 
     def visit_title(self, node):
-        if self.sectionlevel == 1:
-            self._current_title = node.astext()
         raise nodes.SkipNode
 
     def visit_desc(self, node):
@@ -48,7 +46,6 @@ class JuliaHelpTranslator(TextTranslator):
         if node.attributes['objtype'] == 'attribute':
             return
         self.add_text('"),\n', escape=False)
-        category = self._current_title.split('---')[0].strip()
         if self._current_module is not None:
             module = self._current_module
         else:
@@ -56,8 +53,7 @@ class JuliaHelpTranslator(TextTranslator):
         name = self._desc_name
         if self._current_class:
             name = self._current_class
-        self.end_state(first='("%s","%s","%s","' % ( \
-            jl_escape(category), \
+        self.end_state(first='("%s","%s","' % ( \
             jl_escape(module), \
             jl_escape(name)))
         self.in_desc = False
