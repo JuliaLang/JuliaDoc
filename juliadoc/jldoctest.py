@@ -3,7 +3,12 @@ import re
 import sys
 import time
 import codecs
-import StringIO
+
+try:
+    import StringIO as sio
+except ImportError:
+    import io as sio
+
 from os import path
 import traceback
 
@@ -590,7 +595,7 @@ class SphinxDocTestRunner(object):
         summary is.  If the verbosity is not specified, then the
         DocTestRunner's verbosity is used.
         """
-        string_io = StringIO.StringIO()
+        string_io = sio.StringIO()
         old_stdout = sys.stdout
         sys.stdout = string_io
         try:
@@ -613,28 +618,28 @@ class SphinxDocTestRunner(object):
                     failed.append(x)
             if verbose:
                 if notests:
-                    print len(notests), "items had no tests:"
+                    print(len(notests), "items had no tests:")
                     notests.sort()
                     for thing in notests:
-                        print "   ", thing
+                        print("   ", thing)
                 if passed:
-                    print len(passed), "items passed all tests:"
+                    print(len(passed), "items passed all tests:")
                     passed.sort()
                     for thing, count in passed:
-                        print " %3d tests in %s" % (count, thing)
+                        print(" %3d tests in %s" % (count, thing))
             if failed:
-                print self.DIVIDER
-                print len(failed), "items had failures:"
+                print(self.DIVIDER)
+                print(len(failed), "items had failures:")
                 failed.sort()
                 for thing, (f, t) in failed:
-                    print " %3d of %3d in %s" % (f, t, thing)
+                    print(" %3d of %3d in %s" % (f, t, thing))
             if verbose:
-                print totalt, "tests in", len(self._name2ft), "items."
-                print totalt - totalf, "passed and", totalf, "failed."
+                print(totalt, "tests in", len(self._name2ft), "items.")
+                print(totalt - totalf, "passed and", totalf, "failed.")
             if totalf:
-                print "***Test Failed***", totalf, "failures."
+                print("***Test Failed***", totalf, "failures.")
             elif verbose:
-                print "Test passed."
+                print("Test passed.")
             res = TestResults(totalf, totalt)
         finally:
             sys.stdout = old_stdout
