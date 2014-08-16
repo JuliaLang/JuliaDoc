@@ -24,7 +24,7 @@
   {% endif %}
 
   {# CSS #}
-  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   {# OPENSEARCH #}
   {% if not embedded %}
@@ -91,7 +91,7 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        {% set toctree = toctree(maxdepth=2, collapse=False, includehidden=True) %}
+        {% set toctree = toctree(maxdepth=3, collapse=False, includehidden=True) %}
         {% if toctree %}
             {{ toctree }}
         {% else %}

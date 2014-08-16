@@ -6,25 +6,70 @@
     background: #fff;
 }
 
+.wy-nav-content-wrap {
+    border-left: 1px solid #c9c9c9;
+    border-bottom: 1px solid #c9c9c9;
+}
+
 body,
 .wy-body-for-nav,
 .wy-nav-side,
+.wy-menu-vertical,
 .wy-side-nav-search,
 .wy-side-nav-search img {
     background: #fcfcfc;
 }
 
+.wy-menu-vertical > ul > li {
+    border: 1px solid #c9c9c9;
+    border-top: none;
+    margin: 0em 0.809em;
+}
+
+.wy-menu-vertical > ul > li:first-child {
+    border-top: 1px solid #c9c9c9;
+}
+
+.wy-menu-vertical > ul > li > a {
+    font-size: larger !important;
+    padding: 0.809em !important;
+}
+
+.wy-menu-vertical > ul > li.toctree-l1.current {
+    padding-bottom: 0.809em;
+}
+
+.wy-menu-vertical li.current a,
+.wy-menu-vertical li.current.toctree-l2 > a {
+    padding: 0.4045em 1.2135em;
+}
+
+.wy-menu-vertical li.current.toctree-l2 > a {
+    background-color: #fff;
+}
+
+.wy-menu-vertical li.current,
+.wy-menu-vertical li.current > a {
+    background-color: #fff;
+}
+
+.wy-menu-vertical li.current ul {
+    display: none;
+}
+
+.wy-menu-vertical li.current > ul {
+    display: block;
+}
+
 .wy-menu-vertical li.current a,
 .wy-side-nav-search,
 .wy-nav-side {
-    border-right: none;
-    box-shadow: inset -14px 0px 5px -12px rgb(210,210,210);
+    border: none;
 }
 
-.wy-menu-vertical li.current > a,
-.wy-menu-vertical li.current > a:hover {
-    background: #fff;
-    box-shadow: none;
+.wy-menu-vertical li.toctree-l3 a {
+    font-style: italic;
+    padding: 0.303375em 2.427em;
 }
 
 .wy-side-nav-search img {
