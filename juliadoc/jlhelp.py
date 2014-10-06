@@ -19,19 +19,17 @@ class JuliaHelpTranslator(TextTranslator):
         TextTranslator.__init__(self, document, builder)
         self.in_desc = False
 
-    def add_text(self, text, escape=True, force=False):
-        if self.in_desc or force:
+    def add_text(self, text, escape=True):
+        if self.in_desc:
             etext = jl_escape(text) if escape else text
-            self.states[-1].append((-1, etext))
+            TextTranslator.add_text(self, etext)
 
     def visit_title(self, node):
         raise nodes.SkipNode
 
     def visit_desc(self, node):
-        if node.attributes['objtype'] == 'attribute':
-            return
         self.in_desc = True
-        self.new_state(0)
+        self.first_sig = True
 
     def visit_desc_signature(self, node):
         self._current_module = node.attributes.get('module', None)
@@ -42,10 +40,7 @@ class JuliaHelpTranslator(TextTranslator):
         self._desc_name = node.astext()
         TextTranslator.visit_desc_name(self, node)
 
-    def depart_desc(self, node):
-        if node.attributes['objtype'] == 'attribute':
-            return
-        self.add_text('"),\n', escape=False)
+    def depart_desc_signature(self, node):
         if self._current_module is not None:
             module = self._current_module
         else:
@@ -53,9 +48,22 @@ class JuliaHelpTranslator(TextTranslator):
         name = self._desc_name
         if self._current_class:
             name = self._current_class
-        self.end_state(first='("%s","%s","' % ( \
-            jl_escape(module), \
-            jl_escape(name)))
+        if self.first_sig:
+            self.first_sig = False
+            first = '("%s","%s","' % ( \
+                jl_escape(module), \
+                jl_escape(name))
+        else:
+            first = None
+        self.end_state(first=first, wrap=False, end=None)
+
+    def depart_desc_content(self, node):
+        TextTranslator.depart_desc_content(self, node)
+        self.new_state(0)
+        self.add_text('"),\n', escape=False)
+        self.end_state()
+
+    def depart_desc(self, node):
         self.in_desc = False
 
 class JuliaHelpWriter(TextWriter):
