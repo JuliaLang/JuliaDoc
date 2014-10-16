@@ -95,7 +95,7 @@ class JuliaHelpBuilder(TextBuilder):
             f = codecs.open(outfilename, 'w', 'utf-8')
             try:
                 f.write('# automatically generated from files in doc/stdlib/ -- do not edit here\n\n' +
-                        '{\n\n')
+                        'Any[\n\n')
 
                 for docname in self.status_iterator(
                     sorted(docnames), 'processing... ', darkgreen, len(docnames)):
@@ -103,7 +103,7 @@ class JuliaHelpBuilder(TextBuilder):
                     self.writer.write(doctree, f)
                     f.write("\n")
 
-                f.write('\n}\n')
+                f.write('\n]\n')
             finally:
                 f.close()
         except (IOError, OSError) as err:
