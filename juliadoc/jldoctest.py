@@ -804,7 +804,7 @@ Doctest summary
     def test_group(self, group, filename):
 
         j = Popen(["../julia"], stdin=PIPE, stdout=PIPE, stderr=STDOUT)
-        j.stdin.write("macro raw_mstr(s) s end\n")
+        j.stdin.write("macro raw_str(s) s end\n")
         j.stdin.write("_ans = nothing\n")
         self.setup_runner.julia = j
         self.test_runner.julia = j
