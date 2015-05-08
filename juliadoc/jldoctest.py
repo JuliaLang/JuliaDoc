@@ -1,4 +1,3 @@
-
 import re
 import sys
 import time
@@ -26,7 +25,6 @@ from sphinx.util import force_decode
 from sphinx.util.nodes import set_source_info
 from sphinx.util.compat import Directive
 from sphinx.util.console import bold
-from sphinx.util.pycompat import bytes
 from sphinx.ext.doctest import TestDirective, TestGroup, TestCode, \
         TestsetupDirective, TestcleanupDirective, DoctestDirective, \
         TestcodeDirective, TestoutputDirective
@@ -690,7 +688,11 @@ Results of doctest builder run on %s
         self.info(text, nonl=True)
         if self.app.quiet:
             self.warn(text)
-        if isinstance(text, bytes):
+        if sys.version_info >= (3,0,0):
+            isbytes = isinstance(text, bytes)
+        else:
+            isbytes = isinstance(text, str)
+        if isbytes:
             text = force_decode(text, None)
         self.outfile.write(text)
 
