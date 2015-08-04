@@ -479,6 +479,7 @@ class SphinxDocTestRunner(object):
                 # read separator
                 sep = 'fjsdiij3oi123j42'
                 self.julia.stdin.write(('println("' + sep + '")\n').encode('utf-8'))
+                self.julia.stdin.flush()
                 got = []
                 line = ''
                 while line[:-1] != sep:
