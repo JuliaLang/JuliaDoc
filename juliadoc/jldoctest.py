@@ -466,19 +466,19 @@ class SphinxDocTestRunner(object):
             got = ""
             try:
                 # Don't blink!  This is where the user's code gets run.
-                src = example.source.strip().encode('utf-8').replace('"""',r'\"""')
+                src = example.source.strip().replace('"""',r'\"""')
                 # restore ans cleared by the separator println
-                self.julia.stdin.write('ans=_ans;')
+                self.julia.stdin.write('ans=_ans;'.encode('utf-8'))
                 # run command
                 show = 'true' if src[-1] != ';' else 'false'
                 cmd = 'Base.eval_user_input(Base.parse_input_line(raw""" ' \
                     + src + ' """),' + show + ');'
-                self.julia.stdin.write(cmd)
+                self.julia.stdin.write(cmd.encode('utf-8'))
                 # save ans, and make sure no more output is generated
-                self.julia.stdin.write('_ans=ans; nothing\n')
+                self.julia.stdin.write('_ans=ans; nothing\n'.encode('utf-8'))
                 # read separator
                 sep = 'fjsdiij3oi123j42'
-                self.julia.stdin.write('println("' + sep + '")\n')
+                self.julia.stdin.write(('println("' + sep + '")\n').encode('utf-8'))
                 got = []
                 line = ''
                 while line[:-1] != sep:
@@ -803,8 +803,8 @@ Doctest summary
     def test_group(self, group, filename):
 
         j = Popen(["../julia"], stdin=PIPE, stdout=PIPE, stderr=STDOUT)
-        j.stdin.write("macro raw_str(s) s end\n")
-        j.stdin.write("_ans = nothing\n")
+        j.stdin.write("macro raw_str(s) s end\n".encode('utf-8'))
+        j.stdin.write("_ans = nothing\n".encode('utf-8'))
         self.setup_runner.julia = j
         self.test_runner.julia = j
         self.cleanup_runner.julia = j
