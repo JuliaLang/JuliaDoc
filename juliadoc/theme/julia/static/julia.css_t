@@ -52,7 +52,7 @@ code {
     font-size: 80%;
 }
 
-code.descname {
+code.descname, code.descclassname {
     border: none;
     color: #000;
     font-size: 100%;
