@@ -47,6 +47,18 @@ h1,h2,h3,h4,h5,h6 {
     font-family: helvetica, arial, 'freesans clean', sans-serif;
 }
 
+code {
+    color: #73261e;
+    font-size: 80%;
+}
+
+code.descname {
+    border: none;
+    color: #000;
+    font-size: 100%;
+    padding: 1px;
+}
+
 .rst-content dl:not(.docutils) {
     border-top: solid 1px #f8f8f8;
 }
