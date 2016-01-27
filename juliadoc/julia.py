@@ -6,10 +6,10 @@ import sphinx.domains.python
 
 sphinx.domains.python.py_sig_re = re.compile(
     r'''^ ([\w.]+\.)?            # class name(s)
-          ([^\s(]+)  \s*         # thing name
-          (?: \((.*)\)           # optional: arguments
-           (?:\s* -> \s* (.*))?  #           return annotation
-          )? $                   # and nothing more
+          ([^\s(]+)              # thing name
+          (?: \((.*?)\))?        # optional: arguments
+          (?:\s* -> \s* (.*))?   # optional: return annotation
+          $                      # and nothing more
           ''', re.VERBOSE | re.UNICODE)
 
 class JuliaDomain(sphinx.domains.python.PythonDomain):
