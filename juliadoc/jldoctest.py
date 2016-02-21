@@ -806,7 +806,7 @@ Doctest summary
     def test_group(self, group, filename):
 
         j = Popen(["../julia"], stdin=PIPE, stdout=PIPE, stderr=STDOUT)
-        j.stdin.write("macro raw_str(s) s end\n".encode('utf-8'))
+        j.stdin.write("macro raw_str(s) s end;nothing\n".encode('utf-8'))
         j.stdin.write("_ans = nothing\n".encode('utf-8'))
         self.setup_runner.julia = j
         self.test_runner.julia = j
