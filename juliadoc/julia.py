@@ -17,7 +17,7 @@ class JuliaDomain(sphinx.domains.python.PythonDomain):
     name = 'jl'
     label = 'Julia'
 
-JuliaDomain.directives['type'] = JuliaDomain.directives['class']
+JuliaDomain.directives['type'] = JuliaDomain.directives['function']
 
 def setup(app):
     app.add_domain(JuliaDomain)
