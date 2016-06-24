@@ -480,14 +480,14 @@ class SphinxDocTestRunner(object):
                 self.julia.stdin.write('_ans=ans; nothing\n'.encode('utf-8'))
                 # read separator
                 sep = 'fjsdiij3oi123j42'
-                self.julia.stdin.write(('println("' + sep + '")\n').encode('utf-8'))
+                self.julia.stdin.write(('println("\\n' + sep + '")\n').encode('utf-8'))
                 self.julia.stdin.flush()
                 got = []
                 line = ''
                 while line[:-1] != sep:
                     got.append(line)
                     line = self.julia.stdout.readline().decode('utf-8').rstrip() + '\n'
-                got = ''.join(got).expandtabs()
+                got = ''.join(got).expandtabs()[:-1]
                 exception = None
             except KeyboardInterrupt:
                 raise
