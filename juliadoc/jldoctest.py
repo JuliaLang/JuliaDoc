@@ -808,7 +808,15 @@ Doctest summary
         j = Popen(["../julia"], stdin=PIPE, stdout=PIPE, stderr=STDOUT)
         j.stdin.write("macro raw_str(s) s end;nothing\n".encode('utf-8'))
         j.stdin.write("_ans = nothing\n".encode('utf-8'))
-        j.stdin.write("pushdisplay(TextDisplay(IOContext(IOContext(STDOUT, :multiline => true), :limit => true))); nothing\n".encode('utf-8'))
+        j.stdin.write("""
+            if VERSION >= v"0.5.0-dev+1911"
+                pushdisplay(TextDisplay(
+                    IOContext(IOContext(STDOUT, :multiline => true), :limit => true)
+                ));
+                nothing
+            end
+            """.encode('utf-8')
+        )
         self.setup_runner.julia = j
         self.test_runner.julia = j
         self.cleanup_runner.julia = j
