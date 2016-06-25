@@ -384,8 +384,8 @@ class SphinxDocTestRunner(object):
         Report that the given example failed.
         """
         try:
-            out(self._failure_header(test, example) +
-            self._checker.output_difference(example, got, self.optionflags))
+            out(self._failure_header(test, example))
+            out(self._checker.output_difference(example, got, self.optionflags))
         except:
             raise Exception(example.want, got)
 
