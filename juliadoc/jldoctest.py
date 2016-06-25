@@ -384,8 +384,8 @@ class SphinxDocTestRunner(object):
         Report that the given example failed.
         """
         try:
-            out(self._failure_header(test, example) +
-            self._checker.output_difference(example, got, self.optionflags))
+            out(self._failure_header(test, example))
+            out(self._checker.output_difference(example, got, self.optionflags))
         except:
             raise Exception(example.want, got)
 
@@ -480,14 +480,14 @@ class SphinxDocTestRunner(object):
                 self.julia.stdin.write('_ans=ans; nothing\n'.encode('utf-8'))
                 # read separator
                 sep = 'fjsdiij3oi123j42'
-                self.julia.stdin.write(('println("' + sep + '")\n').encode('utf-8'))
+                self.julia.stdin.write(('println("\\n' + sep + '")\n').encode('utf-8'))
                 self.julia.stdin.flush()
                 got = []
                 line = ''
                 while line[:-1] != sep:
                     got.append(line)
                     line = self.julia.stdout.readline().decode('utf-8').rstrip() + '\n'
-                got = ''.join(got).expandtabs()
+                got = ''.join(got).expandtabs()[:-1]
                 exception = None
             except KeyboardInterrupt:
                 raise
@@ -808,6 +808,15 @@ Doctest summary
         j = Popen(["../julia"], stdin=PIPE, stdout=PIPE, stderr=STDOUT)
         j.stdin.write("macro raw_str(s) s end;nothing\n".encode('utf-8'))
         j.stdin.write("_ans = nothing\n".encode('utf-8'))
+        j.stdin.write("""
+            if VERSION >= v"0.5.0-dev+1911"
+                pushdisplay(TextDisplay(
+                    IOContext(IOContext(STDOUT, :multiline => true), :limit => true)
+                ));
+                nothing
+            end
+            """.encode('utf-8')
+        )
         self.setup_runner.julia = j
         self.test_runner.julia = j
         self.cleanup_runner.julia = j
