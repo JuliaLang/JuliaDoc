@@ -1,6 +1,8 @@
-JuliaDoc
-========
-JuliaDoc is a Python package providing Sphinx extensions and a theme for the Julia language documentation at https://julia.readthedocs.org/. It can also be used by Julia packages to create documentation that is visually unified with the language documentation.
+JuliaDoc (DEPRECATED)
+=====================
+JuliaDoc was a Python package providing Sphinx extensions and a theme for the Julia language documentation at https://julia.readthedocs.org/. It also was used by Julia packages to create documentation that is visually unified with the language documentation.
+
+JuliaDoc is now deprecated. Please use [Documenter.jl](https://github.com/JuliaDocs/Documenter.jl) instead.
 
 Usage with ReadTheDocs
 ----------------------
@@ -49,4 +51,4 @@ THE SOFTWARE.
 
 Acknowledgements
 ----------------
-The packaging is directly inspired by the [Caktus theme for Sphinx](https://github.com/caktus/caktus-sphinx-theme/).
+The packaging was directly inspired by the [Caktus theme for Sphinx](https://github.com/caktus/caktus-sphinx-theme/).
